@@ -15,7 +15,7 @@
     "cloudinary": "^1.41.0",
     "date-fns": "^3.0.0",
     "firebase": "^10.7.1",
-    "lucide-react": "^0.300.0",
+    "lucide-react": "^0.469.0",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

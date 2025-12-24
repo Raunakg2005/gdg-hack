@@ -23,9 +23,7 @@ const nextConfig = {
     
     return config
   },
-  experimental: {
-    serverComponentsExternalPackages: ['@google-cloud/vision'],
-  },
+  serverExternalPackages: ['@google-cloud/vision'],
 }
 
 module.exports = nextConfig

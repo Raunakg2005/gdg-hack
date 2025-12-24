@@ -43,5 +43,12 @@ firebase-debug.log
 firestore-debug.log
 # Google Cloud Service Account
 service-account-key.json
-*.json
+
+# JSON config files (but keep package and vercel)
 !vercel.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!next.config.js
+!tailwind.config.ts
+!postcss.config.js

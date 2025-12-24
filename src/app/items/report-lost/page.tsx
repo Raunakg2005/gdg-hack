@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { uploadToCloudinary } from '@/lib/cloudinary'
@@ -170,7 +171,6 @@ export default function ReportLostPage() {
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                   <Sparkles className="h-4 w-4 mr-2 animate-pulse" />
                   Analyzing image with Google Cloud Vision AI...
-                </div>
                 </div>
               )}
             </div>

@@ -211,18 +211,6 @@ export default function RegisterPage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
         </p>
-            className="w-full py-3 bg-gradient-to-r from-primary-600 to-blue-600 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-blue-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-primary-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? 'Creating Account...' : 'Sign Up'}
-          </button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-gray-400">
-          Already have an account?{' '}
-          <Link href="/auth/login" className="text-primary-400 hover:text-primary-300 font-semibold">
-            Log in
-          </Link>
-        </p>
       </div>
     </div>
   )

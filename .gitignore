@@ -44,3 +44,4 @@ firestore-debug.log
 # Google Cloud Service Account
 service-account-key.json
 *.json
+!vercel.json

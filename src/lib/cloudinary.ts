@@ -3,8 +3,7 @@ const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dkzm6ooyt'
 export const uploadToCloudinary = async (file: File): Promise<string> => {
   const formData = new FormData()
   formData.append('file', file)
-  formData.append('upload_preset', 'lost_found_preset') // You'll need to create this in Cloudinary
-  formData.append('cloud_name', cloudName)
+  formData.append('upload_preset', 'lost_found_preset')
 
   try {
     const response = await fetch(
@@ -15,11 +14,22 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
       }
     )
 
+    if (!response.ok) {
+      const errorData = await response.json()
+      console.error('Cloudinary upload error:', errorData)
+      throw new Error(`Cloudinary upload failed: ${errorData.error?.message || 'Unknown error'}`)
+    }
+
     const data = await response.json()
+    
+    if (!data.secure_url) {
+      throw new Error('No secure_url in Cloudinary response')
+    }
+    
     return data.secure_url
   } catch (error) {
     console.error('Error uploading to Cloudinary:', error)
-    throw new Error('Failed to upload image')
+    throw error
   }
 }
 

@@ -8,6 +8,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Lost & Found Portal - AI Powered Matching',
   description: 'Find your lost items with AI-powered image matching',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/logo.svg',
+  },
 }
 
 export default function RootLayout({

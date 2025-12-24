@@ -6,7 +6,7 @@ import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { uploadToCloudinary } from '@/lib/cloudinary'
 import ImageUpload from '@/components/ImageUpload'
-import { Loader2, AlertCircle } from 'lucide-react'
+import { Loader2, AlertCircle, MapPin, Calendar, Hash, MessageSquare, Upload, Sparkles, ArrowLeft } from 'lucide-react'
 import axios from 'axios'
 
 const categories = [
@@ -126,32 +126,36 @@ export default function ReportLostPage() {
   }
 
   if (!user) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>
+    return <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 flex items-center justify-center"><div className="text-white">Loading...</div></div>
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 py-12 relative overflow-hidden">
       {/* Animated Background Blobs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-      <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+      <div className="absolute top-40 right-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       
       <div className="max-w-3xl mx-auto px-4 relative z-10">
-        <div className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-12 w-12 bg-gradient-to-br from-red-900 to-red-800 rounded-xl shadow-lg shadow-red-500/50 flex items-center justify-center">
-              <AlertCircle className="h-6 w-6 text-red-400" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-red-400 to-pink-400 text-transparent bg-clip-text">Report Lost Item</h1>
-              <p className="text-gray-300">Help us find your lost item</p>
-            </div>
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-8">
+          {/* Header */}
+          <div className="mb-8">
+            <Link 
+              href="/items" 
+              className="inline-flex items-center gap-2 text-gray-300 hover:text-white mb-4 transition"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Items
+            </Link>
+            <h1 className="text-3xl font-bold text-white mb-2">Report Lost Item</h1>
+            <p className="text-gray-300">Help us find your lost item by providing details below</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Photo (Optional but recommended)
+            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+              <label className="block text-sm font-medium text-gray-200 mb-3 flex items-center gap-2">
+                <Upload className="w-4 h-4 text-cyan-400" />
+                Photo (Recommended for better matching)
               </label>
               <ImageUpload
                 onImageSelect={handleImageSelect}
@@ -162,9 +166,11 @@ export default function ReportLostPage() {
                 }}
               />
               {analyzing && (
-                <div className="mt-2 flex items-center text-sm text-blue-600">
+                <div className="mt-3 flex items-center text-sm text-cyan-400 bg-cyan-500/10 p-3 rounded-lg border border-cyan-500/20">
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Analyzing image with AI...
+                  <Sparkles className="h-4 w-4 mr-2 animate-pulse" />
+                  Analyzing image with Google Cloud Vision AI...
+                </div>
                 </div>
               )}
             </div>

@@ -1,0 +1,25 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#grad1)"/>
+  
+  <!-- Location Pin Shape -->
+  <path d="M256 120C205.4 120 164 161.4 164 212C164 275 256 392 256 392C256 392 348 275 348 212C348 161.4 306.6 120 256 120Z" fill="white" opacity="0.95"/>
+  
+  <!-- Inner Circle of Pin -->
+  <circle cx="256" cy="212" r="35" fill="url(#grad1)"/>
+  
+  <!-- Magnifying Glass -->
+  <circle cx="320" cy="340" r="50" stroke="white" stroke-width="12" fill="none"/>
+  <line x1="358" y1="378" x2="390" y2="410" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Question Mark inside magnifying glass -->
+  <text x="320" y="360" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">?</text>
+</svg>

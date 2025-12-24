@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { collection, getDocs, query, orderBy, deleteDoc, doc, updateDoc } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { Item } from '@/types'
-import { Package, Users, TrendingUp, Trash2, Eye, CheckCircle, XCircle, BarChart3 } from 'lucide-react'
+import { Package, Users, TrendingUp, Trash2, Eye, CheckCircle, XCircle, BarChart3, BarChart2 } from 'lucide-react'
 import Link from 'next/link'
 import ItemCard from '@/components/ItemCard'
 
@@ -98,23 +98,32 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900">
       {/* Header */}
-      <header className="bg-gray-800 border-b border-gray-700 shadow-lg">
+      <header className="bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-lg sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <Package className="h-8 w-8 text-primary-400" />
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl">
+                <Package className="h-6 w-6 text-white" />
+              </div>
               <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
             </div>
             <div className="flex gap-4 items-center">
-              <Link href="/items" className="px-4 py-2 text-gray-300 hover:text-primary-400">
+              <Link 
+                href="/admin/analytics" 
+                className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-300 flex items-center gap-2"
+              >
+                <BarChart2 className="w-4 h-4" />
+                Analytics
+              </Link>
+              <Link href="/items" className="px-4 py-2 text-gray-300 hover:text-white transition">
                 User View
               </Link>
-              <span className="text-sm text-gray-300">{user.email}</span>
+              <span className="text-sm text-gray-300 hidden md:block">{user.email}</span>
               <button
                 onClick={() => auth.signOut()}
-                className="px-4 py-2 text-gray-300 hover:text-red-400"
+                className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-lg transition"
               >
                 Logout
               </button>
@@ -125,56 +134,67 @@ export default function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <div className="group bg-gradient-to-br from-blue-900 to-blue-800 border border-blue-700/50 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 transform hover:scale-105">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="group bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-300 text-sm font-medium">Total Items</p>
-                <p className="text-3xl font-bold text-white mt-2">{stats.totalItems}</p>
+                <p className="text-gray-300 text-sm font-medium mb-2">Total Items</p>
+                <p className="text-4xl font-bold text-white">{stats.totalItems}</p>
               </div>
-              <Package className="h-12 w-12 text-blue-400 opacity-80 group-hover:animate-pulse" />
+              <div className="p-3 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl">
+                <Package className="h-8 w-8 text-white" />
+              </div>
             </div>
           </div>
 
-          <div className="group bg-gradient-to-br from-red-900 to-red-800 border border-red-700/50 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-red-500/30 transition-all duration-300 transform hover:scale-105">
+          <div className="group bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-red-500/30 transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-red-300 text-sm font-medium">Lost Items</p>
-                <p className="text-3xl font-bold text-white mt-2">{stats.lostItems}</p>
+                <p className="text-gray-300 text-sm font-medium mb-2">Lost Items</p>
+                <p className="text-4xl font-bold text-white">{stats.lostItems}</p>
               </div>
-              <XCircle className="h-12 w-12 text-red-400 opacity-80 group-hover:animate-pulse" />
+              <div className="p-3 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl">
+                <XCircle className="h-8 w-8 text-white" />
+              </div>
             </div>
           </div>
 
-          <div className="group bg-gradient-to-br from-green-900 to-green-800 border border-green-700/50 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-green-500/30 transition-all duration-300 transform hover:scale-105">
+          <div className="group bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-emerald-500/30 transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-green-300 text-sm font-medium">Found Items</p>
-                <p className="text-3xl font-bold text-white mt-2">{stats.foundItems}</p>
+                <p className="text-gray-300 text-sm font-medium mb-2">Found Items</p>
+                <p className="text-4xl font-bold text-white">{stats.foundItems}</p>
               </div>
-              <CheckCircle className="h-12 w-12 text-green-400 opacity-80 group-hover:animate-pulse" />
+              <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl">
+                <CheckCircle className="h-8 w-8 text-white" />
+              </div>
             </div>
           </div>
 
-          <div className="group bg-gradient-to-br from-purple-900 to-purple-800 border border-purple-700/50 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105">
+          <div className="group bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-purple-300 text-sm font-medium">Matched</p>
-                <p className="text-3xl font-bold text-white mt-2">{stats.matchedItems}</p>
+                <p className="text-gray-300 text-sm font-medium mb-2">Matched</p>
+                <p className="text-4xl font-bold text-white">{stats.matchedItems}</p>
               </div>
-              <TrendingUp className="h-12 w-12 text-purple-400 opacity-80 group-hover:animate-pulse" />
+              <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl">
+                <TrendingUp className="h-8 w-8 text-white" />
+              </div>
             </div>
           </div>
         </div>
 
         {/* All Items Table */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl shadow-xl p-6">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-blue-400 text-transparent bg-clip-text mb-6">All Items</h2>
+        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl p-6">
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+            <BarChart3 className="w-6 h-6 text-cyan-400" />
+            All Items Management
+          </h2>
           
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-700">
+                <tr className="border-b border-white/20">
                   <th className="text-left py-3 px-4 text-gray-300 font-semibold">Title</th>
                   <th className="text-left py-3 px-4 text-gray-300 font-semibold">Type</th>
                   <th className="text-left py-3 px-4 text-gray-300 font-semibold">Category</th>
